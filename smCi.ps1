@@ -28,7 +28,7 @@ $Dependencies = [Ordered]@{
     'svp.7z'        = 'https://github.com/bjaan/smoothvideo/blob/main/SVPflow_LastGoodVersions.7z?raw=true' # will need to prompt users to get latest version off official source if they can afford it
     'mvtools.7z'    = @{ Repo = "dubhater/vapoursynth-mvtools";                            Pattern = "vapoursynth-mvtools-v*-win64.7z"}
     'remap.zip'     = @{ Repo = "Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames";    Pattern = "Vapoursynth-RemapFrames-v*-x64.zip"}
-    'librife.dll'   = @{ Repo = "styler00dollar/VapourSynth-RIFE-ncnn-Vulkan";             Pattern = "librife.dll"}
+    'librife.dll'   = @{ Repo = "styler00dollar/VapourSynth-RIFE-ncnn-Vulkan";             Pattern = "librife_windows_x86-64.dll"}
     'vsA6.zip'      = @{ Repo = "AmusementClub/vapoursynth-classic";                       Pattern = "release-x64.zip"}
     'fmtc.zip'      = @{ Repo = 'EleonoreMizo/fmtconv'; Pattern = 'fmtconv-r*.zip'}
     'timecube.7z'   = "https://github.com/sekrit-twc/timecube/releases/download/$timecube_release/timecube_$timecube_release.7z"
