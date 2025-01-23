@@ -20,26 +20,20 @@ if (-not(Get-Command Get -ErrorAction Ignore)){
     }
 }
 $timecube_release = "r3.1"
-$ffms2_release = "2.40"
 $whitelisted_pyd = 'vapoursynth.cp310-win_amd64.pyd'
 
 $Dependencies = [Ordered]@{
-    'py3109.exe' = 'https://www.python.org/ftp/python/3.10.9/python-3.10.9-amd64.exe'
-    'getpip.py'  = 'https://bootstrap.pypa.io/get-pip.py'
-    'svp.7z'     = 'https://github.com/bjaan/smoothvideo/blob/main/SVPflow_LastGoodVersions.7z?raw=true'
-    'akexpr.7z'  = "https://github.com/AkarinVS/vapoursynth-plugin/releases/download/v0.96/akarin-release-lexpr-amd64-v0.96b.7z"
-   #'akexpr.zip' = @{ Repo = "AkarinVS/vapoursynth-plugin";                             Pattern = "akarin-release-lexpr-amd64-v*.7z"}
-    'lsmash.zip' = "https://github.com/AkarinVS/L-SMASH-Works/releases/download/vA.3k/release-x86_64-cachedir-tmp.zip"
-    'mvtools.7z' = @{ Repo = "dubhater/vapoursynth-mvtools";                            Pattern = "vapoursynth-mvtools-v*-win64.7z"}
-    'remap.zip'  = @{ Repo = "Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames";    Pattern = "Vapoursynth-RemapFrames-v*-x64.zip"}
-    # 'rife.7z'    = @{ Repo = "HomeOfVapourSynthEvolution/VapourSynth-RIFE-ncnn-Vulkan"; Pattern = "RIFE-r*-win64.7z"}
-    'librife.dll'    = @{ Repo = "styler00dollar/VapourSynth-RIFE-ncnn-Vulkan"; Pattern = "librife.dll"}
-    'vsA6.zip'   = @{ Repo = "AmusementClub/vapoursynth-classic";                       Pattern = "release-x64.zip"}
-    'fmtc.zip'   = @{ Repo = 'EleonoreMizo/fmtconv'; Pattern = 'fmtconv-r*.zip'}
-    'timecube.7z' = "https://github.com/sekrit-twc/timecube/releases/download/$timecube_release/timecube_$timecube_release.7z"
-    'ffms2.7z' = "https://github.com/FFMS/ffms2/releases/download/$ffms2_release/ffms2-$ffms2_release-msvc.7z"
-   #'vsfbd.dll' = @{Repo = "couleurm/vs-frameblender";                                  Pattern = "vs-frameblender-*.dll"}
-     'avisource.7z' = "https://github.com/vapoursynth/vs-avisource-obsolete/releases/download/R1/avisource-r1.7z"
+    'py3131.exe'    = 'https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe'
+    'getpip.py'     = 'https://bootstrap.pypa.io/get-pip.py'
+    'svp.7z'        = 'https://github.com/bjaan/smoothvideo/blob/main/SVPflow_LastGoodVersions.7z?raw=true' # will need to prompt users to get latest version off official source if they can afford it
+    'mvtools.7z'    = @{ Repo = "dubhater/vapoursynth-mvtools";                            Pattern = "vapoursynth-mvtools-v*-win64.7z"}
+    'remap.zip'     = @{ Repo = "Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames";    Pattern = "Vapoursynth-RemapFrames-v*-x64.zip"}
+    'librife.dll'   = @{ Repo = "styler00dollar/VapourSynth-RIFE-ncnn-Vulkan";             Pattern = "librife.dll"}
+    'vsA6.zip'      = @{ Repo = "AmusementClub/vapoursynth-classic";                       Pattern = "release-x64.zip"}
+    'fmtc.zip'      = @{ Repo = 'EleonoreMizo/fmtconv'; Pattern = 'fmtconv-r*.zip'}
+    'timecube.7z'   = "https://github.com/sekrit-twc/timecube/releases/download/$timecube_release/timecube_$timecube_release.7z"
+    'avisource.7z'  = "https://github.com/vapoursynth/vs-avisource-obsolete/releases/download/R1/avisource-r1.7z"
+    'ffmpeg.zip'    = "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n7.1-latest-win64-gpl-7.1.zip"
 }
 
 $ErrorActionPreference = 'Stop'
@@ -132,7 +126,7 @@ $VS = Get-Item ./smBuild/VapourSynth/
 
 Write-Warning "Extracting Python"
 
-dark -nologo -x $Temp $py3109 | Out-Null
+dark -nologo -x $Temp $py3131 | Out-Null
 
 @(
 'path'
@@ -186,7 +180,6 @@ Write-Warning "VS Plugins"
 Push-Location $VS/vapoursynth64/plugins
 
 7z e -y $avisource -r "win64\avisource.dll" . | Out-Null
-7z e -y $ffms2 -r "ffms2-$ffms2_release-msvc\x64\ffms2.dll" . | Out-Null
 7z e -y $svp -r svpflow1_vs.dll svpflow2_vs.dll . | Out-Null
 7z e -y $fmtc -r 'win64\fmtconv.dll' . | Out-Null
 7z e -y $timecube -r "timecube_$timecube_release\x64\vscube.dll" . | Out-Null
