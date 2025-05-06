@@ -31,4 +31,3 @@ jobs:
           fail_on_unmatched_files: true
           files: |
             ./smShip/VapourSynth.7z
-            ./smShip/VapourSynth-Stripped.7z
