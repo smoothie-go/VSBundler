@@ -1,5 +1,5 @@
 param($GITHUB_TOKEN)
-Invoke-Expression "& {$(Invoke-RestMethod https://github.com/vapoursynth/vapoursynth/releases/download/R70/Install-Portable-VapourSynth-R70.ps1)} -TargetFolder ./VapourSynth -Python38 -Unattended"
+Invoke-Expression "& {$(Invoke-RestMethod https://github.com/vapoursynth/vapoursynth/releases/download/R70/Install-Portable-VapourSynth-R70.ps1)} -TargetFolder ./VapourSynth -Python310 -Unattended"
 $timecube_release = "r3.1"
 $ffms2_release = "5.0"
 
