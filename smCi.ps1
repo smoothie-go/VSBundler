@@ -135,7 +135,6 @@ dark -nologo -x $Temp $py3131 | Out-Null
 'doc'
 'launcher'
 'test'
-'tools'
 'tcltk'
 ) | ForEach-Object {
     Remove-Item "$Temp/AttachedContainer/$PSItem.msi"
