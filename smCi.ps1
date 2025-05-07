@@ -102,4 +102,4 @@ $akexpr, $lsmash, $mvtools, $rife, $remap | ForEach-Object { 7z x $_ }
 popd
 
 
-7z a ".\smShip\VapourSynth.7z" .\VapourSynth\ -t7z -mx=8 -sae
+Compress-Archive -Path .\VapourSynth\ -DestinationPath .\smShip\VapourSynth.zip -Force
