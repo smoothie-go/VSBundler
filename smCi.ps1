@@ -20,7 +20,7 @@ $Dependencies = [Ordered]@{
     'fmtc.zip'      = @{ Repo = 'EleonoreMizo/fmtconv'; Pattern = 'fmtconv-r*.zip' }
     'timecube.7z'   = "https://github.com/sekrit-twc/timecube/releases/download/$timecube_release/timecube_$timecube_release.7z"
     'ffms2.7z'      = "https://github.com/FFMS/ffms2/releases/download/$ffms2_release/ffms2-$ffms2_release-msvc.7z"
-    #'vsfbd.dll' = @{Repo = "couleurm/vs-frameblender";                                  Pattern = "vs-frameblender-*.dll"}
+    'vsfbd.dll' = @{Repo = "couleurm/vs-frameblender";                                  Pattern = "vs-frameblender-*.dll"}
     'avisource.7z'  = "https://github.com/vapoursynth/vs-avisource-obsolete/releases/download/R1/avisource-r1.7z"
 }
 
@@ -97,6 +97,7 @@ Push-Location VapourSynth/vs-plugins/
 7z e -y $timecube -r "timecube_$timecube_release\x64\vscube.dll" . | Out-Null
 
 Copy-Item $librife .
+Copy-Item $vsfbd .
 $akexpr, $lsmash, $mvtools, $rife, $remap | ForEach-Object { 7z x $_ }
 
 popd
