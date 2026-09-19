@@ -1,17 +1,19 @@
 param($GITHUB_TOKEN)
 Invoke-Expression "& {$(Invoke-RestMethod https://github.com/vapoursynth/vapoursynth/releases/download/R70/Install-Portable-VapourSynth-R70.ps1)} -TargetFolder ./VapourSynth -Python310 -Unattended"
+$bestsource_release = "R22"
 $timecube_release = "r3.1"
 $ffms2_release = "5.0"
+$mvtools_release = "v24"
 
 $Dependencies = [Ordered]@{
     # 'py.zip'        = 'https://www.python.org/ftp/python/3.8.10/python-3.8.10-embed-amd64.zip'
     # 'getpip.py'     = 'https://bootstrap.pypa.io/get-pip.py'
-    'svp.7z'        = 'https://github.com/bjaan/smoothvideo/blob/main/SVPflow_LastGoodVersions.7z?raw=true'
+    'svp.zip'       = @{ Repo = "Z1xus/open-svpflow"; Pattern = "x86_64-pc-windows-msvc.zip" }
     'akexpr.7z'     = "https://github.com/AkarinVS/vapoursynth-plugin/releases/download/v0.96/akarin-release-lexpr-amd64-v0.96b.7z"
     #'akexpr.zip' = @{ Repo = "AkarinVS/vapoursynth-plugin";                             Pattern = "akarin-release-lexpr-amd64-v*.7z"}
-    'bestsource.7z' = "https://github.com/vapoursynth/bestsource/releases/download/R10/BestSource-R10.7z"
+    'bestsource.zip' = "https://github.com/vapoursynth/bestsource/releases/download/$bestsource_release/BestSource-$bestsource_release-win64-msvc.zip"
     'lsmash.zip'    = "https://github.com/AkarinVS/L-SMASH-Works/releases/download/vA.3k/release-x86_64-cachedir-tmp.zip"
-    'mvtools.7z'    = @{ Repo = "dubhater/vapoursynth-mvtools"; Pattern = "vapoursynth-mvtools-v*-win64.7z" }
+    'mvtools.7z'    = "https://github.com/dubhatervapoursynth/vapoursynth-mvtools/releases/download/$mvtools_release/vapoursynth-mvtools-$mvtools_release-win64.7z"
     'remap.zip'     = @{ Repo = "Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames"; Pattern = "Vapoursynth-RemapFrames-v*-x64.zip" }
     # 'rife.7z'    = @{ Repo = "HomeOfVapourSynthEvolution/VapourSynth-RIFE-ncnn-Vulkan"; Pattern = "RIFE-r*-win64.7z"}
     'librife.dll'   = @{ Repo = "styler00dollar/VapourSynth-RIFE-ncnn-Vulkan"; Pattern = "librife_windows_x86-64.dll" }
@@ -89,7 +91,8 @@ ForEach ($File in [Array]$Dependencies.Keys) {
 
 Push-Location VapourSynth/vs-plugins/
 
-7z e -y $bestsource "bestsource.dll" . | Out-Null
+7z e -y $bestsource "BestSource*.dll" . | Out-Null
+Get-ChildItem -Filter "BestSource*.dll" | Where-Object { $_.Name -ne "BestSource.dll" } | Rename-Item -NewName "BestSource.dll"
 7z e -y $avisource -r "win64\avisource.dll" . | Out-Null
 7z e -y $ffms2 -r "ffms2-$ffms2_release-msvc\x64\ffms2.dll" . | Out-Null
 7z e -y $svp -r svpflow1_vs.dll svpflow2_vs.dll . | Out-Null
